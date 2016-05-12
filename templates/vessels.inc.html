@@ -1,0 +1,69 @@
+<!-- El encabezado ya se agrega desde otra funcion -->
+
+
+<div class="page-header">
+    <h1>Vessels</h1>
+</div>
+
+<form class="form-horizontal" action="{ACTION}" method="GET" name="frm1">
+    <div class="table-responsive">
+        <table class="table table-border table-hover table-condensed">
+            <tr>
+                <td>
+                    <input class="form-control" type="text" name="keyword" placeholder="Search by Vessel">
+                </td>
+                <td>
+                    <input class="form-control" type="text" name="keyword2" placeholder="Search by Voyage">
+                </td>
+                <td>
+                    <button class="btn btn-primary" type="submit" name="search">Search</button>
+                    <a href="vesselNew.php"><button class="btn btn-success" type="button">New Vessel</button>
+                    </a>
+                </td> 
+            </tr>
+        </table>
+    </div>
+</form>
+
+<div class="table-responsive">
+
+    <div class="col-md-5 col-md-offset-5">
+        <nav>
+            <ul class="pagination">
+                {CONTROL}
+            </ul>
+        </nav>
+    </div>
+
+    <table class="table table-border table-hover table-condensed">
+        <tr class="active">
+            <th>#</th>
+            <th>Vessel</th>
+            <th>Voyage</th>
+            <th>POL</th>
+            <th>POD</th>
+            <th>ETA</th>
+            <th>ETD</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>            
+        </tr>
+        <!-- BEGIN blqTupla -->
+        <tr>
+            <td>{ID}</td>
+            <td>{VESSEL}</td>
+            <td>{VOYAGE}</td>
+            <td>{POL}</td>
+            <td>{POD}</td>
+            <td>{ETA}</td>
+            <td>{ETD}</td>
+            <td>{OPC1}</td>
+            <td>{OPC2}</td>
+        </tr>
+        <!-- END blqTupla -->
+    </table>
+    <div class="col-md-5 col-md-offset-5"><span class="label label-primary">{INFODATA}</span></div>
+</div>
+
+
+<!-- El pie de pagina se agrega desde otra funcion -->
+

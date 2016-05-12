@@ -1,0 +1,58 @@
+
+
+<div class="page-header">
+    <h1>Vessel <small>[ New record ]</small></h1>
+</div>
+
+
+<form class="form-horizontal" action="{ACTION}" method="post" enctype="multipart/form-data" name="frm1" >
+    <div class="form-group">
+        <label class="control-label col-md-2">Vessel :</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="vessel" maxlength="120" value="{VESSEL}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Voyage : </label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="voyage" maxlength="10" value="{VOYAGE}">           
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">POL : </label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="pol" maxlength="5" value="{POL}">           
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">POD : </label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="pod" maxlength="5" value="{POD}">           
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">ETA : </label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="eta" maxlength="10" value="{ETA}">           
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">ETD : </label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="etd" maxlength="10" value="{ETD}">           
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2 col-md-offset-2">
+            <input class="btn btn-primary" type="submit" value="Accept">                
+        </div>
+    </div>    
+    <div class="form-group">
+        <div class="col-md-2 col-md-offset-2">
+            <input type="hidden" name="modo" value="aceptar">        
+            {MENSAJE}
+        </div>
+    </div>
+</form>
+

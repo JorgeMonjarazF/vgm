@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="iso-8859-1">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <link href="../include/estilo.css" rel="stylesheet" type="text/css">
+    <link href="../include/sionMenu.css" rel="stylesheet" type="text/css">
+    <script src="../include/funcionesG.js" language="javascript"></script>
+    <script type="text/javascript">
+
+        function validEnvio(form){
+
+            var idNav;
+            idNav = form.idNav.value;
+            if( idNav==1 ){
+                // MSC
+                form.opcPro[0].disabled = true;  // desctivalo
+                form.opcPro[1].disabled = false; // no desactivar
+                form.opcPro[1].checked = true;  // marcalo
+            }
+            else if( idNav==3 ){
+                // MOL
+                form.opcPro[0].disabled = false;  // activar
+                form.opcPro[1].disabled = false;  // activar
+                form.opcPro[1].checked = true;  // marcalo
+            }
+            else if( idNav==4 ){
+                // HS
+                form.opcPro[0].disabled = false;  
+                form.opcPro[1].disabled = false;  
+                form.opcPro[1].checked = true;  
+            }
+            else if( idNav==5 ){
+                // HS
+                form.opcPro[0].disabled = false;  // activar
+                form.opcPro[1].disabled = false;  // activar
+                form.opcPro[1].checked = true;  // marcalo
+            }
+            else{
+                // OTROS
+                // Solo email
+                form.opcPro[0].disabled = false;
+                form.opcPro[1].disabled = true;
+                form.opcPro[0].checked = true;
+            }
+        }
+
+    </script>
+</head>
+<html>
+    <body>
+        <table border="1" cellpadding="12" cellspacing="12" align="center" bgcolor="White" >
+            <tr>
+                <td>                
+                    <center><h2>EDI Factory<br><img border="0" src="../images/logoTrane.png" width="150" height="50"></h2></center>
+                    <table border="0" cellpadding="15" cellspacing="1" align="center">
+                        <tr class="color2">
+                            <td colspan="2"><center><i>{MENSAJE}</i></center></td>
+                        </tr>
+                        <tr class="color2">
+                            <td align="right"><b>I. PLANTILLA MAESTRA</b></td>                 
+                            <td>
+                                <a href="../masters/traneMaster.xlsx"><img border="0" src="../images/iconoXLS.jpg" width="50" height="50"></a><br>
+                                Descargue la plantilla a su disco duro. Observe que tiene 2 hojas, una es para capturar las ENTRADAS y la otra para las SALIDAS.<br>
+                                Después se tienen que GUARDAR COMO (Formato CSV o delimitado por comas) y este es el que debemos de cargar en la fase II.
+                            </td>
+                        </tr>
+                        <tr class="color2">
+                            <td align="right"><b>II. GENERAR EDI</b></td>                 
+                            <td>
+                                <form action="{ACTION}" method="post" enctype="multipart/form-data" name="frm1">
+                                    <table border="0" cellpadding="2" cellspacing="1">       
+                                        <!--
+                                        <tr>
+                                            <td align="right"><b>Oficina : </b></td>
+                                            <td>
+                                                {OFICINA}                                                                                                
+                                            </td>                                            
+                                        </tr>
+                                        -->                                        
+                                        <tr>
+                                            <td align="right"><b>Naviera (Destino) : </b></td>
+                                            <td>
+                                                <select size="1" name="idNav" onchange="validEnvio(document.frm1)">
+                                                    <option value="">-</option>
+                                                    <option value="1" selected>MSC (Mediterranean Shipping Company)</option>
+                                                    <!-- <option value="2">Hapag-Lloyd</option> -->
+                                                    <option value="3">MOL (Mutsui O.S.K. Lines)</option>
+                                                    <option value="4">Hamburg Sud</option>
+                                                    <option value="5">ZIM</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <!--
+                                        <tr>
+                                            <td align="right"><b>Impo/Expo : </b></td>                
+                                            <td>
+                                                <select name="impoExpo" size="1">
+                                                    <option value="">-</option>
+                                                    <option value="E" selected>Export</option>
+                                                    <option value="I">Import</option>                                        
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        -->
+                                        <tr>
+                                            <td align="right"><b>Status Conte : </b></td>                
+                                            <td>
+                                                <select name="stConte" size="1">
+                                                    <option value="">-</option>
+                                                    <option value="E" selected>Vacios</option>
+                                                    <option value="F">Llenos</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"><hr></td>
+                                        </tr>                                        
+                                        <!-- <tr>
+                                            <td align="right"><b>Tipo de proceso : </b></td>
+                                            <td>
+                                                <input type="radio" name="opcPro" value="saveAs" checked> Guardar en disco...<br>
+                                                <input type="radio" name="opcPro" value="email">Enviarlo directo a la naviera por EMAIL.<br>
+                                                <input type="radio" name="opcPro" value="ftp" disabled> Enviarlo directo a la naviera por FTP.<br>
+                                            </td>
+                                        </tr>
+                                        -->
+                                        <tr>
+                                            <td align="right"><b>Archivo (Excel):</b></td>
+                                            <td>
+                                                <input type="file" name="userfile">                                    
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right"><b>Tipo de Envio : </b></td>
+                                            <td>
+                                                <!-- <input type="radio" name="opcPro" value="saveAs" checked> Guardar en disco...<br> -->
+                                                <input type="radio" name="opcPro" value="email" disabled>Enviarme los EDI por EMAIL<br>
+                                                <input type="radio" name="opcPro" value="ftp" checked>Enviarlo directo a la naviera por el protocolo FTP.<br>
+                                            </td>
+                                        </tr>
+                                        <!--
+                                        <tr>
+                                            <td align="right"><b>Formato :</b></td>
+                                            <td>
+                                                <select name="formato">
+                                                    <option value="excel">Excel</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        -->
+                                        <tr>
+                                            <td align="right"></td>
+                                            <td>
+                                                <input type="submit" name="enviar" value="Enviar" />
+                                                <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+                                                <input type="hidden" name="modo" value="aceptar" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </td>
+                        </tr>                        
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+
+    </body>
+</html>

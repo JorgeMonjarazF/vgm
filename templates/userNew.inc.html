@@ -1,0 +1,62 @@
+
+<div class="container">
+    <div class="page-header">
+    <h1>Users <small>[ New record ]</small></h1>
+  </div>
+
+<form class="form-horizontal" action="{ACTION}" method="post" enctype="multipart/form-data" name="frm1" >
+    <div class="form-group">
+        <label  class="control-label col-md-2">Name:</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="name" size="49" maxlength="100" value="{NAME}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label  class="control-label col-md-2">Company:</label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="company" size="49" maxlength="100" value="{COMPANY}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label  class="control-label col-md-2">Sender ID : </label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="senderId" size="16" maxlength="15" value="{SENDERID}">            
+        </div>
+    </div>
+    <div class="form-group">
+        <label  class="control-label col-md-2">New Password : </label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="password" size="16" maxlength="15" value="{PASS}">            
+        </div>
+    </div>
+    <div class="form-group">
+        <label  class="control-label col-md-2">Email (To) :     </label>
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="emailTO" size="49" maxlength="80" value="{EMAILTO}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label  class="control-label col-md-2">Email's (Cc) : </label>
+        <div class="col-md-4">
+            <textarea class="form-control" rows="3" name="emailCC">{EMAILCC}</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-4 col-md-offset-2">
+            <input type="checkbox" name="flgNotify" value="1" checked> Notify user by email.
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2 col-md-offset-2">
+            <input class="btn btn-primary" type="submit" value="Accept">                
+        </div>
+    </div>    
+    <div class="form-group">
+        <div class="col-md-2 col-md-offset-2">
+            <input type="hidden" name="modo" value="aceptar">        
+            {MENSAJE}
+        </div>
+    </div>
+</form>
+
+</div>

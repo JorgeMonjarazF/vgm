@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+    <head>
+        <link href="../include/estilo.css" rel="stylesheet" type="text/css">
+        <script src="../include/funcionesG.js" language="javascript"></script>
+    </head>
+    <body>
+        <table border="1" cellpadding="12" cellspacing="12" align="center" bgcolor="White" >
+            <tr>
+                <td>                
+                    <center><h2>EDI Factory</h2></center>
+                    <p>                    
+                    CONVERTIDOR 1. Este programa permite reconocer un archivo con <b>formato CSV</b><br>
+                        y transformarlo a formato de EDI-CODECO-D95B,
+                        y es utilizado para los movimientos GATE-IN / GATE-OUT.<br>
+                    <br>
+
+                    <table border="0" cellpadding="15" cellspacing="1" align="center">
+                        <tr class="color2">
+                            <td colspan="2"><center><i>{MENSAJE}</i></center></td>
+                        </tr>
+                        <tr class="color2">
+                            <td align="right"><b>I. PLANTILLA MAESTRA</b></td>                 
+                            <td>
+                                <a href="../masters/EDIFactoryGateInOut_template.xlsx"><img border="0" src="../images/iconoXLS.jpg" width="50" height="50"></a><br>
+                                Descargue la plantilla a su disco duro. Observe que tiene 2 hojas, una es para capturar las ENTRADAS y la otra para las SALIDAS.<br>
+                                Después se tienen que GUARDAR COMO (Formato CSV o delimitado por comas) y este es el que debemos de cargar en la fase II.
+                            </td>
+                        </tr>
+                        <tr class="color2">
+                            <td align="right"><b>II. GENERAR EDI</b></td>                 
+                            <td>
+                                <form action="{ACTION}" method="post" enctype="multipart/form-data" name="frm1">
+                                    <table border="0" cellpadding="2" cellspacing="1">       
+                                        <!--
+                                        <tr>
+                                            <td align="right"><b>Oficina : </b></td>
+                                            <td>
+                                                {OFICINA}                                                                                                
+                                            </td>                                            
+                                        </tr>
+                                        -->                                        
+                                        <tr>
+                                            <td align="right"><b>Naviera (Destino) : </b></td>
+                                            <td>
+                                                <select size="1" name="idNav">
+                                                    <option value="">-</option>
+                                                    <option value="1">MSC (Mediterranean Shipping Company)</option>
+                                                    <option value="2">Hapag-Lloyd</option>
+                                                    <option value="3">Otra Naviera... (Pregunte al Administrador) </option>
+                                                    <!-- <option value="2">MOL (Mutsui O.S.K. Lines)</option> -->
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right"><b>Archivo : </b></td>                
+                                            <td>
+                                                <select name="fileType">
+                                                    <option value="">-</option>
+                                                    <option value="GATE-IN">GATE-IN</option>
+                                                    <option value="GATE-OUT">GATE-OUT</option>
+                                                    <option value="POSITIONS">POSITIONS</option>
+                                                </select>
+                                                <b>Ori/Des : </b>
+                                                <select name="codOD" size="1">                                                                                                                                                                                                    
+                                                    <option value="">-</option>
+                                                    <!-- BEGIN blqCodDes -->
+                                                    <option value="{COD_DES}">{COD_NAME}</option>
+                                                    <!-- END blqCodDes -->
+                                                    
+                                                    <!--
+                                                    <option value="LMR00">ALTAMIRA</option>
+                                                    <option value="LZC00">LAZARO CARDENAS</option>
+                                                    <option value="ZLO00">MANZANILLO</option>                                                         
+                                                    <option value="MEX00">MEXICO</option>                                                         
+                                                    <option value="VER00">VERACRUZ</option>
+                                                    -->
+                                                </select>          
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right"><b>Impo/Expo : </b></td>                
+                                            <td>
+                                                <select name="impoExpo" size="1">
+                                                    <option value="">-</option>
+                                                    <option value="E">Export</option>
+                                                    <option value="I">Import</option>                                        
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right"><b>Status Conte : </b></td>                
+                                            <td>
+                                                <select name="stConte" size="1">
+                                                    <option value="">-</option>
+                                                    <option value="E">Vacios</option>
+                                                    <option value="F">Llenos</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"><hr></td>
+                                        </tr>                                        
+                                        <tr>
+                                            <td align="right"><b>Delimitador : </b></td>
+                                            <td>                                    
+                                                <select name="delimitador" size="1">
+                                                    <option value=",">,</option>
+                                                    <option value=";">;</option>
+                                                </select>            
+                                                (El archivo CSV esta separado por este delimitador)                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right"><b>Tipo de proceso : </b></td>
+                                            <td>
+                                                <input type="radio" name="opcPro" value="saveAs" checked> Guardar en disco...<br>
+                                                <input type="radio" name="opcPro" value="email">Enviarlo directo a la naviera por EMAIL.<br>
+                                                <input type="radio" name="opcPro" value="ftp" disabled> Enviarlo directo a la naviera por FTP.<br>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right"><b>Archivo (CSV):</b></td>
+                                            <td>
+                                                <input type="file" name="userfile">                                    
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right"></td>
+                                            <td>
+                                                <input type="submit" value="Generar EDI">
+                                                <input type="hidden" name="modo" value="aceptar">
+                                                <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </td>
+                        </tr>                        
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+
+    </body>
+</html>

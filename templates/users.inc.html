@@ -1,0 +1,70 @@
+<!-- El encabezado ya se agrega desde otra funcion -->
+
+
+<div class="page-header">
+    <h1>Users</h1>
+</div>
+
+<form class="form-horizontal" action="{ACTION}" method="GET" name="frm1">
+    <div class="table-responsive">
+        <table class="table table-border table-hover table-condensed">
+            <tr>
+                <td>
+                    <input class="form-control" type="text" name="keyword3" placeholder="Search by Company">
+                </td>
+                <td>
+                    <input class="form-control" type="text" name="keyword" placeholder="Search by Name">
+                </td>
+                <td>
+                    <input class="form-control" type="text" name="keyword2" placeholder="Search by Email">
+                </td>
+                <td>
+                    <button class="btn btn-primary" type="submit" name="search">Search</button>
+                    <a href="userNew.php"><button class="btn btn-success" type="button">New User</button>
+                    </a>
+                </td> 
+            </tr>
+        </table>
+    </div>
+</form>
+
+<div class="table-responsive">
+
+    <div class="col-md-5 col-md-offset-5">
+        <nav>
+            <ul class="pagination">
+                {CONTROL}
+            </ul>
+        </nav>
+    </div>
+
+    <table class="table table-border table-hover table-condensed">
+        <tr class="active">
+            <th>#</th>
+            <th>Company</th>
+            <th>Name</th>
+            <th>Email(1)</th>
+            <th>Email(2)</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+        </tr>
+        <!-- BEGIN blqTupla -->
+        <tr>
+            <td>{ID}</td>
+            <td>{COMPANY}</td>
+            <td>{NAME}</td>
+            <td>{E1}</td>
+            <td>{E2}</td>
+            <td>{OPC1}</td>
+            <td>{OPC2}</td>
+            <td>{OPC3}</td>
+        </tr>
+        <!-- END blqTupla -->
+    </table>
+    <div class="col-md-5 col-md-offset-5"><span class="label label-primary">{INFODATA}</span></div>
+</div>
+
+
+<!-- El pie de pagina se agrega desde otra funcion -->
+

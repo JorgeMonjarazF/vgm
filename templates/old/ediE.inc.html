@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+    <head>
+        <link href="../include/estilo.css" rel="stylesheet" type="text/css">
+        <script src="../include/funcionesG.js" language="javascript"></script>
+    </head>
+    <body>
+        <b>EDI PARA MSC-MEXICO :: ENTRADAS</b>
+        <table  border="0" width="70%">
+            <tr>
+                <td bgcolor="#669900"></td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+        </table><br>
+        <b>INSTRUCCIONES</b>
+        <p>
+        <ol type="1">
+            <li>Descargar la plantilla MAESTRA para su llenado de info.</li>
+            <li>Una vez llenada la info, "Guardar como" CSV (Delimitado por comas)</li>
+            <li>Cargarlo al sistema para VALIDAR.</li>
+            <li>Enviar el EDI por Email</li>
+            <li>FIN</li>    
+        </ol>  
+
+        <table border="0" cellpadding="15" cellspacing="1">
+            <tr class="color2">
+                <td align="right"><b>I. PLANTILLA MAESTRA</b></td>                 
+                <td>
+                    <a href="../masters/plantillaMaestra.xlsx"><img border="0" src="../images/iconoXLS.jpg" width="50" height="50"></a>
+                </td>
+            </tr>
+            <tr class="color2">
+                <td align="right"><b>II. VALIDADOR</b></td>                 
+                <td>
+                    <form action="{ACTION}" method="post" enctype="multipart/form-data" name="frm1">
+                        <table border="0" cellpadding="2" cellspacing="1">       
+                            <tr>
+                                <td align="right"><b>Impo/Expo : </b></td>                
+                                <td>
+                                    <select name="impoExpo" size="1">
+                                        <option value="-">-</option>
+                                        <option value="E">EXPORT</option>
+                                        <option value="I">IMPORT</option>                                        
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right"><b>Tipo de Mov. : </b></td>                
+                                <td>
+                                    <select name="tipoMov" size="1">
+                                        <option value="-">-</option>
+                                        <option value="E">Vacios</option>
+                                        <option value="F">Llenos</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Delimitador : </b></td>
+                                <td>                                    
+                                    <select name="delimitador" size="1">
+                                        <option value=",">,</option>
+                                        <option value=";">;</option>
+                                    </select>            
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><font color="Black"><b>Archivo CSV :</b></font></td>
+                                <td>
+                                    <input type="file" name="userfile">                                    
+                                    <input type="submit" value="Validar">
+                                    <input type="hidden" name="modo" value="validar">
+                                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000">                                                
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </td>
+            </tr>            
+            <tr class="color2">
+                <td align="right"><b>III. ENVIAR EDI</b></td>                             
+                <td>
+                    Esto enviara correos a : <p>                
+                    lrodriguez@mscmx.mscgva.ch<br>
+                    auditoria@tytintermodales.com<br>
+                    <br>
+                    <form action="{ACTION}" method="post" enctype="multipart/form-data" name="frm2">                        
+                        <input type="submit" value="Enviar EMAIL">
+                        <input type="hidden" name="modo" value="email">                                                                        
+                    </form>                    
+                    <br>
+                    <i>Nota: Si desea incluir mas correos, favor de comunicarse con el departamento de sistemas.</i>
+                </td>
+            </tr>
+        </table>
+        <br><br>        
+        <b>RESULT</b>
+        <hr>
+
+    </body>
+</html>

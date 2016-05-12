@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>VGM</title>
+    <meta charset="ISO8859-1">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0,minumum-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">        
+    <!-- <link rel="icon" href="../../favicon.ico"> -->
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h2 class="form-signin-heading">
+            <strong>VGM System<br>
+            <small>Version 1.0</small>
+            </strong></h2>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-5 col-md-offset-3">
+            <form class="form-signin" action="{ACTION}" method="POST" enctype="multipart/form-data" name="frm1">
+                <h3>Please sign in</h3>
+                <label for="inputEmail" class="sr-only">Email address</label>
+                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="rememberme" value="1"> Remember me
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                <input type="hidden" name="modo" value="aceptar">
+            </form>
+            {MENSAJE}
+        </div>
+    </div>
+</div> <!-- /container -->
+
+
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

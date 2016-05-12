@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="iso-8859-1">
+    <title>Menu Docu</title>
+    <link href="../include/sionMenu.css" rel="stylesheet" type="text/css">
+    <script src="../include/funcionesG.js" language="javascript"></script>
+</head>
+<body>
+
+<header>
+    <figure id="logo">
+        <img  src="../images/logoMscGrisSmall.gif">
+    </figure>
+    <h2>
+        Mediterranean Shipping Company México<br>
+        Plantillas
+    </h2>
+</header>
+<br/><br/><br/><br/>
+
+
+<table class="formulario" width="500px">
+    <tr>
+        <td colspan="2">
+            <b>INSTRUCTIONS</b><p />
+            1. Get the file "booking list" from MSC-A.<br>
+            2. Upload the file (Excel97 format "xlsx".)<br>
+            3. End.
+            <br />
+            <br />
+            <form action="{ACTION}" method="post" enctype="multipart/form-data" name="frm1">
+                Archivo XLS :
+                <input type="file" name="userfile" />
+                <input type="submit" name="enviar" value="Enviar" />
+                <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+                <input type="hidden" name="modo" value="enviar" />
+            </form>
+        </td>
+    </tr>
+</table>
+<br/><br/>
+
+<b>RESULT</b><hr />
+
+
+</body>
+</html>

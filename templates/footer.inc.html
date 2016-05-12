@@ -1,0 +1,28 @@
+
+	</div> <!-- Close, DIV Container -->
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/bootstrap3-typeahead.js"></script>
+
+<script>    
+$(function() {  
+    $("#typeahead").typeahead({
+        source: function(query,process){
+            $.ajax({
+                url : 'jsonVessel.php',
+                type : 'POST',
+                data : 'query=' + query ,
+                dataType : 'JSON',
+                async : true,
+                success : function (data){
+                    //console.log(data);
+                    process(data);
+                }
+            });
+        }
+    });
+});
+</script>
+
+</body>
+</html>

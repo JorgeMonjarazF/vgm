@@ -1,0 +1,186 @@
+<?php
+session_start();
+//session_unset();  // No descomentar...
+//session_destroy(); // No descomentar...
+$_SESSION = array();
+
+include("include/db_mysqli.inc");
+include("include/template.inc");
+include("include/confGral.php");
+
+/*
+// Prueba de variable de sesion.
+$_SESSION['test'] = 42;
+$test = 43;
+echo $_SESSION['test'];
+*/					
+
+/** fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+	* @return arreglo de los permisos que tiene el usuario
+	* @param  id de usuario $id
+	* @desc Busca los permisos que tiene el usuario para almacenarlo en una variable	de session.
+	*/			
+function usrPerms($id){
+	global $db2;
+	$sql="select distinct id_permiso from REL_USR_PERM where id_usuario='$id' ";
+	$db2->query($sql);
+	while($db2->next_record()){
+		//echo "Registro... ". $db2->f(id_rel_usr_perm) ."<br>";
+		$arrPerms[]=$db2->f(id_permiso);
+	}
+	return $arrPerms;
+}
+/* ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff */
+/*--------------------------------------------------------------------*/
+if( $_POST['modo']=="aceptar" ) {
+
+	$login = $_POST['login'];
+	$password = $_POST['password'];
+
+	$sql = "select count(id_usuario) as totalUsr from USUARIO where login='$login'";
+	$db->query($sql);
+	while( $db->next_record() ){
+		$totalUsr=$db->f(totalUsr);
+		if ( $totalUsr==1 ){
+			$sql = "select * from USUARIO where login='$login'";
+			$db->query($sql);
+			while( $db->next_record() ){
+				$l= $db->f(login);
+				$p= $db->f(password);
+				if ( $l==$login ){
+					// cifra el password para poderlo comparar con el dato en la tabla USUARIO.
+					$pass= md5($password);
+					if ( $pass==$p ){
+						$sesIdUsuario= $db->f(id_usuario);
+						$sesUsuario= $db->f(usuario);                        
+                        $sesOficina= $db->f(oficina);
+						//$sesArrPerms= usrPerms($sesIdUsuario);
+                        //$sesIdOficina= $db->f(id_oficina);
+
+						// Registra las variables de sesion.
+						$_SESSION['sesIdUsuario'] = $sesIdUsuario;
+                        $_SESSION['sesUsuario'] = $sesUsuario;
+                        $_SESSION['sesOficina'] = $sesOficina;
+                        //$_SESSION['sesArrPerms'] = $sesArrPerms;
+						//$_SESSION['sesIdOficina'] = $sesIdOficina;
+						// Antes-No descomentar.
+						//session_register("sesIdUsuario");
+						// session_register("sesArrPerms");
+						//session_register("sesUsuario");
+						
+                        //echo "sesUsuario : $sesUsuario ".$_SESSION['sesUsuario'];
+                        
+                                                
+                        header("Location: http://".$_SERVER['HTTP_HOST']
+						.dirname($_SERVER['PHP_SELF'])
+						."/panel.html");
+                        
+
+					}
+					else {
+						$errorPassword=1;
+					}
+
+				}
+			} // fin del while.
+		} // FIN EXISTE USUARIO.
+		else {
+			$errorLogin=1;
+		}
+	} // fin del while
+
+
+}
+
+
+?>
+
+<html>
+<head>
+	<title>EDI-Factory</title>
+	<meta name="description" content="">
+    <meta name="keywords" content="Generar EDI,EDI CODECO,CODECO">
+    <link href="include/estilo.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<form action="<?php echo $SCRIPT_NAME?>" method="POST" enctype="multipart/form-data" name="frmLogin">
+<center>
+<br><br>
+<table border="0" width="100%" cellpadding="0" cellspacing="0">
+<tr align="center">
+	<td >		
+        <font color="blue" size="8">EDI FACTORY</font><br>
+        <font color="gray" size="4">        
+        <i>( www.edifactory.com.mx )</i>
+        </font>
+	</td>
+</tr>
+</table>
+<br>
+<br>
+
+
+<table border="0" cellpadding="2" cellspacing="0" width="400">
+<tr >
+	<td align="center">
+		<table border="0" cellpadding="2" cellspacing="0" width="100%">
+		<tr class="color3">
+			<th colspan="2" bgcolor="#3567BB"><font color="White">Acceso</font></th>
+		</tr>
+		<tr>
+			<td align="right">Login :</td>
+			<td><input type="text" name="login" size="10" maxlength="10" value=""></td>		   
+		</tr>
+		<tr>
+			<td align="right">Password :</td>
+			<td><input type="password" name="password" size="10" maxlength="10" value=""></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center">
+			<input type="submit" value="Aceptar">
+			<input type="reset" value="Limpiar">
+			<input type="hidden" name="modo" value="aceptar">
+			</td>
+		</tr>
+		<tr>
+			<td bgcolor="#3567BB" colspan="3">
+			<font color="White">
+			<ol type="1">
+			<li>Por favor ingrese su Login y Password para acceder al portal. 			
+   			<li>Si aun no esta registrado presione AQUI para registrarse.   			   			   			
+   			</ol>
+   			Nota : Por la seguridad del sistema, si usted demora mas de 20 minutos en alguna operacion, el sistema cerrara la sesion automaticamente.
+   			</font>
+			</td>
+		</tr>	
+		</table>
+		<?php
+		if ($msg_error) {
+			echo "<br><b><font color=\"gray\"> $msg_error </font></b></br>";
+		}
+		?>
+		<p><font color="red">
+		<?php
+		if (isset($errorPassword)){
+			echo "LA CONTRASEÑA ES INCORRECTA...<br>POR FAVOR INTENTE DE NUEVO<br>";
+		}
+		if (isset($errorLogin)){
+			echo "LOGIN INCORRECTO...<BR>POR FAVOR INTENTE DE NUEVO<br>";
+		}
+		?>
+	</td>
+	<!--<td></td>-->
+</table>
+<br>
+<br>
+
+<!--
+Copyright 2013 "Mopsa S.A. de C.V.". All rights reserved. Copyright/IP Policy | Terms of Service | Guide to Online Security<br>
+NOTICE: We collect personal information on this site.<br>
+MEXICO,D.F. 2013.
+-->
+
+</form>
+</body>
+</html>
